@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gửi Nhi · 20.10</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Be+Vietnam+Pro:wght@300;400;500&display=swap">
+<style>
+:root{--bg:#fbf4ea;--bg2:#e2eef7;--ink:#4b3b3f;--soft:#8d7479;--accent:#e27b93;--accent2:#c9566f;--card:rgba(255,252,248,.78);--line:rgba(226,123,147,.28);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root.never{--bg:#1e1316}}
+:root.never{--bg:#1e1316}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(900px 600px at 85% 105%,rgba(247,200,212,.55),transparent 70%),radial-gradient(1200px 700px at 50% -10%,var(--bg2),var(--bg));color:var(--ink);font-family:'Be Vietnam Pro',system-ui,sans-serif;font-weight:300;line-height:1.8;overflow-x:hidden}
+main{max-width:620px;margin:0 auto;padding:56px 24px 72px;text-align:center;position:relative;z-index:1}
+.date{display:inline-block;font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);border:1px solid var(--line);padding:6px 16px;border-radius:99px;animation:rise 1s both}
+h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(2.4rem,9vw,3.8rem);line-height:1.1;margin:22px 0 6px;animation:rise 1s .15s both}
+h1 em{color:var(--accent);font-style:italic}
+.sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;color:var(--soft);margin:0 0 36px;animation:rise 1s .3s both}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:32px 28px;text-align:left;backdrop-filter:blur(6px);animation:rise 1s .45s both}
+.card p{margin:0 0 18px}
+.card p:last-child{margin:0}
+.hi{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:var(--accent2)}
+.en{color:var(--soft);font-style:italic}
+.sign{text-align:right;font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:var(--accent2)}
+.cta{margin-top:40px;animation:rise 1s .6s both}
+button.play{font:inherit;font-weight:500;font-size:1.05rem;cursor:pointer;border:0;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));padding:16px 34px;border-radius:99px;box-shadow:0 10px 30px -8px var(--accent);transition:transform .2s,box-shadow .2s;animation:pulse 2.6s infinite}
+button.play:hover{transform:translateY(-2px) scale(1.03)}
+.hint{display:block;margin-top:14px;font-size:.85rem;color:var(--soft)}
+footer{margin-top:56px;font-size:.85rem;color:var(--soft)}
+.modal{position:fixed;inset:0;z-index:10;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(140,165,190,.35);backdrop-filter:blur(8px)}
+.modal.open{display:flex;animation:fade .3s}
+.box{width:100%;max-width:560px;background:var(--bg);border:1px solid var(--line);border-radius:24px;padding:28px;text-align:center;position:relative}
+.box h2{font-family:'Cormorant Garamond',serif;font-size:2rem;margin:0 0 6px}
+.box p{margin:0 0 18px;color:var(--soft)}
+.box video{width:100%;border-radius:16px;background:#000}
+.x{position:absolute;top:10px;right:14px;background:none;border:0;font-size:1.8rem;color:var(--soft);cursor:pointer}
+a.go{display:inline-block;text-decoration:none;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));padding:14px 28px;border-radius:99px;font-weight:500}
+.petal{position:fixed;top:-30px;z-index:0;pointer-events:none;opacity:.35;animation:fall linear infinite}
+.envwrap{margin:8px auto 0;animation:rise 1s .45s both;transition:opacity .6s,transform .6s}
+.envwrap.gone{opacity:0;transform:translateY(-20px) scale(.96);pointer-events:none}
+.env{position:relative;width:min(280px,80vw);height:180px;margin:0 auto;border:0;background:none;cursor:pointer;perspective:800px;font:inherit;color:inherit;padding:0}
+.env .back{position:absolute;inset:0;background:linear-gradient(160deg,var(--accent),var(--accent2));border-radius:8px;box-shadow:0 18px 40px -14px var(--accent)}
+.env .front{position:absolute;inset:0;border-radius:8px;background:linear-gradient(160deg,rgba(255,255,255,.22),rgba(0,0,0,.08));clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%)}
+.env .flap{position:absolute;left:0;right:0;top:0;height:62%;background:linear-gradient(180deg,var(--accent2),var(--accent));clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .9s cubic-bezier(.4,.1,.2,1);filter:brightness(1.05)}
+.env .seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:1.7rem;z-index:2;transition:opacity .3s}
+.env.open .flap{transform:rotateX(180deg)}
+.env.open .seal{opacity:0}
+.env:hover:not(.open){transform:translateY(-3px) rotate(-1deg)}
+.env{transition:transform .25s}
+.tap{display:block;margin-top:18px;font-size:.9rem;color:var(--soft)}
+#letter{animation:none;display:none;perspective:1000px}
+#letter.open{display:block}
+#letter.open>*{transform-origin:top;backface-visibility:hidden;animation:unfold 1s cubic-bezier(.2,.7,.2,1) both}
+#letter.open>:nth-child(1){animation-delay:.1s}
+#letter.open>:nth-child(2){animation-delay:.55s}
+#letter.open>:nth-child(3){animation-delay:1s}
+#letter.open>:nth-child(4){animation-delay:1.45s}
+#letter.open>:nth-child(5){animation-delay:1.9s}
+#letter.open>:nth-child(6){animation-delay:2.35s}
+#cta{display:none}
+#cta.show{display:block}
+@keyframes unfold{0%{transform:rotateX(-95deg);opacity:0}35%{opacity:1}100%{transform:rotateX(0);opacity:1}}
+.inl{display:inline-block;width:1.7em;height:1.7em;vertical-align:-.55em;color:#f6b8c8}
+.garden{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.fl{position:absolute;opacity:.75;transform:rotate(var(--r));animation:sway 7s ease-in-out infinite}
+.fl svg{width:100%;height:100%;display:block;overflow:visible}
+@keyframes sway{0%,100%{transform:rotate(var(--r))}50%{transform:rotate(calc(var(--r) + 7deg))}}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{box-shadow:0 10px 30px -8px var(--accent)}50%{box-shadow:0 10px 44px 0 var(--accent)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="lily" viewBox="0 0 100 100"><g fill="currentColor" stroke="rgba(150,70,90,.18)" stroke-width="1"><ellipse cx="50" cy="26" rx="9.5" ry="23"/><ellipse cx="50" cy="26" rx="9.5" ry="23" transform="rotate(60 50 50)"/><ellipse cx="50" cy="26" rx="9.5" ry="23" transform="rotate(120 50 50)"/><ellipse cx="50" cy="26" rx="9.5" ry="23" transform="rotate(180 50 50)"/><ellipse cx="50" cy="26" rx="9.5" ry="23" transform="rotate(240 50 50)"/><ellipse cx="50" cy="26" rx="9.5" ry="23" transform="rotate(300 50 50)"/></g><g stroke="#d9728c" stroke-width="1.6" stroke-linecap="round"><line x1="50" y1="50" x2="50" y2="28"/><line x1="50" y1="50" x2="69" y2="39"/><line x1="50" y1="50" x2="31" y2="39"/></g><g fill="#f0b84f"><circle cx="50" cy="27" r="3"/><circle cx="69.5" cy="38.5" r="3"/><circle cx="30.5" cy="38.5" r="3"/></g><circle cx="50" cy="50" r="4.5" fill="#e9a23b"/></symbol>
+<symbol id="daisy" viewBox="0 0 100 100"><g fill="currentColor"><ellipse cx="50" cy="24" rx="5" ry="20"/><ellipse cx="50" cy="24" rx="5" ry="20" transform="rotate(30 50 50)"/><ellipse cx="50" cy="24" rx="5" ry="20" transform="rotate(60 50 50)"/><ellipse cx="50" cy="24" rx="5" ry="20" transform="rotate(90 50 50)"/><ellipse cx="50" cy="24" rx="5" ry="20" transform="rotate(120 50 50)"/><ellipse cx="50" cy="24" rx="5" ry="20" transform="rotate(150 50 50)"/><ellipse cx="50" cy="24" rx="5" ry="20" transform="rotate(180 50 50)"/><ellipse cx="50" cy="24" rx="5" ry="20" transform="rotate(210 50 50)"/><ellipse cx="50" cy="24" rx="5" ry="20" transform="rotate(240 50 50)"/><ellipse cx="50" cy="24" rx="5" ry="20" transform="rotate(270 50 50)"/><ellipse cx="50" cy="24" rx="5" ry="20" transform="rotate(300 50 50)"/><ellipse cx="50" cy="24" rx="5" ry="20" transform="rotate(330 50 50)"/></g><circle cx="50" cy="50" r="10" fill="#f4c95d"/></symbol>
+<symbol id="blossom" viewBox="0 0 100 100"><g fill="currentColor" stroke="rgba(150,70,90,.15)"><circle cx="50" cy="28" r="17"/><circle cx="71" cy="43" r="17"/><circle cx="63" cy="68" r="17"/><circle cx="37" cy="68" r="17"/><circle cx="29" cy="43" r="17"/></g><circle cx="50" cy="50" r="7" fill="#f7d37a"/></symbol>
+<symbol id="cosmos" viewBox="0 0 100 100"><g fill="currentColor" stroke="rgba(150,70,90,.15)"><ellipse cx="50" cy="27" rx="10" ry="22"/><ellipse cx="50" cy="27" rx="10" ry="22" transform="rotate(45 50 50)"/><ellipse cx="50" cy="27" rx="10" ry="22" transform="rotate(90 50 50)"/><ellipse cx="50" cy="27" rx="10" ry="22" transform="rotate(135 50 50)"/><ellipse cx="50" cy="27" rx="10" ry="22" transform="rotate(180 50 50)"/><ellipse cx="50" cy="27" rx="10" ry="22" transform="rotate(225 50 50)"/><ellipse cx="50" cy="27" rx="10" ry="22" transform="rotate(270 50 50)"/><ellipse cx="50" cy="27" rx="10" ry="22" transform="rotate(315 50 50)"/></g><circle cx="50" cy="50" r="6" fill="#f2b84b"/></symbol>
+<symbol id="tulip" viewBox="0 0 100 100"><path d="M50 62 L50 98" stroke="#9cc7a8" stroke-width="4" stroke-linecap="round"/><path d="M50 90 Q70 80 74 62 Q58 70 50 84Z" fill="#a9d2b4"/><path d="M28 18 Q26 62 50 64 Q74 62 72 18 L61 34 L50 12 L39 34Z" fill="currentColor" stroke="rgba(150,70,90,.18)" stroke-width="1"/></symbol>
+<symbol id="leaf" viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="9" ry="30" fill="#b5d8bf" transform="rotate(35 50 50)"/><ellipse cx="50" cy="50" rx="9" ry="30" fill="#a3cdb0" transform="rotate(-35 50 50)"/></symbol>
+</defs></svg>
+<div class="garden" id="garden" aria-hidden="true"></div>
+<main>
+  <span class="date">20 · 10 · Ngày Phụ nữ Việt Nam</span>
+  <h1>Chúc mừng <em>Nhi</em></h1>
+  <p class="sub">Happy Vietnamese Women’s Day 🌸</p>
+
+  <div class="envwrap" id="envwrap">
+    <button class="env" id="env" aria-label="Mở thư / Open the letter">
+      <span class="back"></span><span class="front"></span><span class="flap"></span><span class="seal"><svg width="46" height="46" viewBox="0 0 48 48" aria-hidden="true"><g fill="#fffaf5" stroke="#f3b8c6" stroke-width=".8"><ellipse cx="24" cy="12" rx="4.6" ry="11"/><ellipse cx="24" cy="12" rx="4.6" ry="11" transform="rotate(60 24 24)"/><ellipse cx="24" cy="12" rx="4.6" ry="11" transform="rotate(120 24 24)"/><ellipse cx="24" cy="12" rx="4.6" ry="11" transform="rotate(180 24 24)"/><ellipse cx="24" cy="12" rx="4.6" ry="11" transform="rotate(240 24 24)"/><ellipse cx="24" cy="12" rx="4.6" ry="11" transform="rotate(300 24 24)"/></g><g stroke="#e27b93" stroke-width="1" stroke-linecap="round"><line x1="24" y1="24" x2="24" y2="13"/><line x1="24" y1="24" x2="33.5" y2="18.5"/><line x1="24" y1="24" x2="14.5" y2="18.5"/></g><g fill="#f0b84f"><circle cx="24" cy="12.5" r="1.6"/><circle cx="33.2" cy="18.2" r="1.6"/><circle cx="14.8" cy="18.2" r="1.6"/></g><circle cx="24" cy="24" r="2.4" fill="#e9a23b"/></svg></span>
+    </button>
+    <span class="tap">Gửi em 🦭</span>
+  </div>
+
+  <section class="card" id="letter">
+    <p class="hi">Gửi Nhi,</p>
+    <p>Chúc em một ngày 20/10 thật vui vẻ nha 🦭</p>
+    <p>Anh nhớ em thích bài này, nên anh muốn thử tập guitar để chơi tặng em nhân dịp 20/10. Anh không biết mình đàn đã hay hay chưa, nhưng anh đã dành thời gian tập luyện vì muốn gửi đến em một món quà nhỏ thật đặc biệt. <span class="en">It may not be perfect, but I really tried.</span></p>
+    <p>Cảm ơn em vì những kỷ niệm đẹp và những điều mà hai đứa đã từng trải qua cùng nhau. Anh vẫn luôn trân trọng khoảng thời gian ấy.</p>
+    <p>Mong em luôn có thật nhiều niềm vui, gặp được những điều may mắn trong cuộc sống và có thật nhiều lý do để mỉm cười nha. Chúc em sẽ luôn được yêu thương và trân trọng theo cách mà em xứng đáng. <svg class="inl" viewBox="0 0 100 100" aria-hidden="true"><use href="#lily"/></svg></p>
+    <p class="sign">— Một món quà nhỏ từ anh</p>
+  </section>
+
+  <div class="cta" id="cta">
+    <button class="play" id="open">🎸Click hereee</button>
+    
+  </div>
+  
+</main>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="box">
+    <button class="x" id="close" aria-label="Đóng / Close">×</button>
+    <h2>Tặng em</h2>
+    <p>A song for you 🎶</p>
+    <div id="stage"></div>
+  </div>
+</div>
+
+<script>
+// ===== THÊM VIDEO Ở ĐÂY · ADD YOUR VIDEO HERE =====
+// 1) Put your video file (.mp4 recommended) in the SAME folder as this HTML file.
+// 2) Type its exact file name between the quotes below.
+const VIDEO_FILE = "video.mp4";
+// ==================================================
+const modal=document.getElementById('modal'),stage=document.getElementById('stage');
+function show(){
+  stage.innerHTML='';
+  if(!VIDEO_FILE){stage.innerHTML='<p>(Chưa có video · No video yet)</p>';}
+  else if(true){
+    const v=document.createElement('video');v.src=VIDEO_FILE;v.controls=true;v.autoplay=true;v.playsInline=true;v.onerror=function(){stage.innerHTML='<p>Không tìm thấy file video · Video file not found</p>'};stage.appendChild(v);
+  }else{
+    stage.innerHTML='<a class="go" target="_blank" rel="noopener" href="'+VIDEO_FILE+'">▶ Xem video · Watch</a>';
+  }
+  modal.classList.add('open');
+}
+function hide(){modal.classList.remove('open');stage.innerHTML='';}
+document.getElementById('open').onclick=show;
+document.getElementById('env').onclick=function(){
+  if(this.classList.contains('open'))return;
+  this.classList.add('open');
+  setTimeout(()=>document.getElementById('envwrap').classList.add('gone'),900);
+  setTimeout(()=>{document.getElementById('envwrap').style.display='none';document.getElementById('letter').classList.add('open');},1400);
+  setTimeout(()=>document.getElementById('cta').classList.add('show'),4400);
+};
+document.getElementById('close').onclick=hide;
+modal.onclick=e=>{if(e.target===modal)hide()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hide()});
+(function(){
+  const G=document.getElementById('garden'),rnd=(a,b)=>a+Math.random()*(b-a);
+  const types=['lily','lily','lily','daisy','blossom','cosmos','tulip','blossom','daisy','leaf'];
+  const cols=['#f9c6d3','#fde3d4','#ffffff','#d3e5f4','#f4a9bd','#e9dbf4','#fff1c4','#fbd5dd'];
+  for(let i=0;i<36;i++){
+    const r=Math.random();let x,y;
+    if(r<.4){x=rnd(-5,17);y=rnd(-3,100)}else if(r<.8){x=rnd(83,103);y=rnd(-3,100)}else if(r<.9){x=rnd(15,85);y=rnd(-5,6)}else{x=rnd(15,85);y=rnd(92,103)}
+    const t=types[Math.floor(Math.random()*types.length)],s=t==='lily'?rnd(70,130):rnd(40,95);
+    const d=document.createElement('div');d.className='fl';
+    d.style.cssText='left:'+x+'%;top:'+y+'%;width:'+s+'px;height:'+s+'px;color:'+cols[Math.floor(Math.random()*cols.length)]+';--r:'+rnd(-30,30)+'deg;animation-duration:'+rnd(6,11)+'s;animation-delay:'+(-rnd(0,8))+'s';
+    d.innerHTML='<svg viewBox="0 0 100 100"><use href="#'+t+'"/></svg>';
+    G.appendChild(d);
+  }
+})();
+</script>
+</body>
+</html>
